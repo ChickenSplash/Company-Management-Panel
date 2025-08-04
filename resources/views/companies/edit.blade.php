@@ -13,15 +13,21 @@
                     @method('PUT')
                     
                     <label>Name</label>
-                    <input type="text" name="name" class="bg-black">
+                    <input type="text" name="name" class="bg-black" value="{{ old('name', $company->name) }}">
                     
                     <label>Email</label>
-                    <input type="text" name="email" class="bg-black">
+                    <input type="text" name="email" class="bg-black" value="{{ old('email', $company->email) }}">
                     
                     <label>Website</label>
-                    <input type="text" name="website" class="bg-black">
+                    <input type="text" name="website" class="bg-black" value="{{ old('website', $company->website) }}">
                     
                     <button type="submit">Update</button>
+                </form>
+                <form action="{{ route('companies.destroy', $company->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit">Delete</button>
                 </form>
             </div>
         </div>

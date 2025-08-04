@@ -41,4 +41,12 @@ class CompanyController extends Controller
         
         return redirect()->route('companies.show', $id);
     }
+
+    public function destroy($id)
+    {
+        $company = Company::findOrFail($id);
+        $company->delete();
+
+        return redirect()->route('dashboard');
+    }
 }
