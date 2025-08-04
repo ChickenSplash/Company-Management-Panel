@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [CompanyController::class, 'index'])->name('dashboard');
     Route::get('/companies/{id}', [CompanyController::class, 'show'])->name('companies.show');
+    Route::get('/companies/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+    Route::put('/companies/{id}', [CompanyController::class, 'update'])->name('companies.update');
 });
 
 Route::middleware('auth')->group(function () {

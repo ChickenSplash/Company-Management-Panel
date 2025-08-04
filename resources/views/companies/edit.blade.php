@@ -1,0 +1,29 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Edit Company') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="p-6 mb-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
+                <form action="{{ route('companies.update', $company->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    
+                    <label>Name</label>
+                    <input type="text" name="name" class="bg-black">
+                    
+                    <label>Email</label>
+                    <input type="text" name="email" class="bg-black">
+                    
+                    <label>Website</label>
+                    <input type="text" name="website" class="bg-black">
+                    
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

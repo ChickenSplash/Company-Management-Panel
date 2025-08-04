@@ -11,6 +11,7 @@
                 <h3>{{ $company->name }}</h3>
                 <a class="block">{{ $company->email }}</a>
                 <a class="block">Visit Website</a>
+                <a href="{{ route('companies.edit', $company->id) }}">Edit</a>
                 <a href="/">Back</a>
             </div>
         </div>
