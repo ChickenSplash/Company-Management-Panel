@@ -7,13 +7,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    @foreach ($companies as $company)
-                        <li>{{ $company->name }}</li>
-                    @endforeach
-                </div>
-            </div>
+            <ul>
+                @foreach ($companies as $company)
+                    <x-company-list-item :company="$company">{{ $company->name }}</x-company-list-item>
+                @endforeach
+            </ul>
         </div>
     </div>
 </x-app-layout>
