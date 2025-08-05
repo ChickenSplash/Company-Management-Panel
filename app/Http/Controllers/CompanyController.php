@@ -7,22 +7,22 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    public function index() {
-        
+    public function index() 
+    { 
         $companies = Company::all();
 
-        return view('dashboard', compact('companies'));
+        return view('companies.index', compact('companies'));
     }
 
-    public function show($id) { // after user clicking on link of corresponding company card from dashboard, run this method
-
-        $company = Company::findOrFail($id);
+    public function show($id) 
+    { // after user clicking on link of corresponding company card from dashboard, run this method
+        $company = Company::with('employees')->findOrFail($id);
 
         return view('companies.show', compact('company'));
     }
 
-    public function edit($id) {
-        
+    public function edit($id) 
+    {
         $company = Company::findOrFail($id);
 
         return view('companies.edit',  compact('company'));
@@ -47,6 +47,6 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $company->delete();
 
-        return redirect()->route('dashboard');
+        return redirect()->route('companies.index');
     }
 }
