@@ -12,7 +12,7 @@
                 <p> {{ $employee->company->name }} </p>
                 <p><a>{{ $employee->email }}</a></p>
                 <p><a>{{ $employee->phone }}</a></p>
-                <a>Edit</a>
+                <a href="{{ route('employees.edit', $employee->id) }}">Edit</a>
                 <a href="{{ route('employees.index') }}">Back</a>
             </div>
         </div>

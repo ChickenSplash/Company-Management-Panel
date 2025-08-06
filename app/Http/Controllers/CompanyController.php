@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CompanyController extends Controller
 {
@@ -25,7 +26,7 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
 
-        return view('companies.edit',  compact('company'));
+        return view('companies.edit', compact('company'));
     }
 
     public function update(Request $request, $id)
@@ -40,6 +41,32 @@ class CompanyController extends Controller
         $company->update($validated);
         
         return redirect()->route('companies.show', $id);
+    }
+
+    public function create()
+    {
+        return view('companies.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'website' => 'nullable|url|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100',
+        ]);
+        
+        
+        if ($request->hasFile('logo')) { // If a logo was uploaded with the form
+            // Store the logo
+            $path = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $path;
+        }
+
+        Company::create($validated);
+
+        return redirect()->route('companies.index');
     }
 
     public function destroy($id)

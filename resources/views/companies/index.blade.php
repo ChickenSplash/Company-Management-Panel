@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <ul>
                 @foreach ($companies as $company)
-                <x-company-list-item :company="$company">{{ $company->name }}</x-company-list-item>
+                    <x-company-list-item :company="$company">{{ $company->name }}</x-company-list-item>
                 @endforeach
             </ul>
         </div>
