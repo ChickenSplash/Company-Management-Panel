@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\Nullable;
 
 class CompanyController extends Controller
@@ -35,9 +36,20 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100',
         ]);
 
         $company = Company::findOrFail($id);
+        
+        if ($request->hasFile('logo')) { // if request has new logo, delete old logo if it exists
+            if ($company->logo) {
+                Storage::disk('public')->delete($company->logo);
+            }
+
+            $path = $request->file('logo')->store('logos', 'public');
+            $validated['logo'] = $path;
+        }
+        
         $company->update($validated);
         
         return redirect()->route('companies.show', $id);
@@ -72,6 +84,11 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $company = Company::findOrFail($id);
+
+        if ($company->logo) { // if the company has set logo, delete from storage
+            Storage::disk('public')->delete($company->logo);
+        }
+
         $company->delete();
 
         return redirect()->route('companies.index');

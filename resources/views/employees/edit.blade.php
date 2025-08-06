@@ -23,7 +23,15 @@
 
                     <label>Phone</label>
                     <input type="text" name="phone" class="bg-black" value="{{ old('phone', $employee->phone) }}">
-                    
+
+                    <label for="company_id">Select Company</label>
+                    <select name="company_id" id="company_id" required>
+                        <option value="{{ $employee->company_id }}">-- Choose Company --</option>
+                        @foreach ($companies as $company)
+                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                        @endforeach
+                    </select>
+
                     <button type="submit">Update</button>
                 </form>
                 <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">

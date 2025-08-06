@@ -25,8 +25,9 @@ class EmployeeController extends Controller
     public function edit($id) 
     {
         $employee = Employee::findOrFail($id);
+        $companies = Company::all();
 
-        return view('employees.edit', compact('employee'));
+        return view('employees.edit', compact('employee', 'companies'));
     }
 
     public function update(Request $request, $id)
@@ -36,6 +37,7 @@ class EmployeeController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'company_id' => 'nullable|exists:companies,id',
         ]);
 
         $employee = Employee::findOrFail($id);
