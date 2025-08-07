@@ -41,7 +41,7 @@
                 </form>
                 <form id="back" action="{{ route('companies.show', $company->id) }}" method="GET">
                 </form>
-                <div class="buttons border-t border-gray-100 dark:border-gray-700">
+                <div class="buttons">
                     <x-primary-button form="update">Update</x-primary-button>
                     <x-primary-button form="delete">Delete</x-primary-button>
                     <x-primary-button form="back">Back</x-primary-button>

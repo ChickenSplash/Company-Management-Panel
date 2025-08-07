@@ -1,43 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@forward "tailwind";
+@forward "base";
+@forward "forms";
+@forward "employee-card";
+@forward "company-card";
+@forward "modules";
 
-$break-point-small: 640px;
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
-
-    .item {
-        input, select {
-            display: block; 
-            margin-top: 0.25rem; 
-            width: 100%;
-        }
-
-        .error {
-            margin-top: 2px;
-        }
-
-        #logo {
-            height: 42px;
-            cursor: pointer;
-
-            &::file-selector-button {
-                display: none;
-            }
-        }
-    }
-
-    @media (min-width: $break-point-small) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-.buttons {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 30px;
-    margin-top: 30px;
-}
