@@ -11,14 +11,46 @@
                 <div class="company">
                     <div class="name">
                         <img class="logo" src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
-                        <h3>{{ $company->name }}</h3>
+                        <div class="details">
+                            <h3>{{ $company->name }}</h3>
+                            <p><a class="link" href="mailto:{{ $company->email }}" target="_blank">{{ $company->email }}</a></p>
+                            <p><a class="link" href="{{ $company->website }}" target="_blank">Visit Website</strong></a> <span class="link-text">({{ $company->website }})</span></p>
+                        </div>
                     </div>
                     <div class="info">
-                        <p><strong>Email:</strong> <a>{{ $company->email }}</a></p>
-                        <p><strong>Website:</strong> <a>{{ $company->website }}</a></p>
-                        @foreach ($company->employees as $employee)
-                            <p><a href="{{ route('employees.show', $employee->id)}}">{{ $employee->first_name . ' ' . $employee->last_name }}</a></p>
-                        @endforeach
+                        @if ($company->employees()->count())
+                            <h4>Total Employees: {{ $company->employees()->count() }}</h4>
+                            <div class="employee-table-wrapper">
+                                <table class="employee-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($company->employees as $employee)
+                                            <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
+                                                <td>{{ $employee->id }}</td>
+                                                <td>{{ $employee->first_name . ' ' . $employee->last_name}}</td>
+                                                <td>{{ $employee->email }}</td>
+                                                <td>{{ $employee->phone }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <h4>This company has no employees.</h4>
+                        @endif
+                    </div>
+                    <div class="dates">
+                        <p>Created on {{ $company->created_at->format('jS F Y') }}</p>
+                        @if ($company->created_at != $company->updated_at)
+                            <p>Updated on {{ $company->updated_at->format('jS F Y') }}</p>
+                        @endif
                     </div>
                     <div class="buttons">
                         <x-primary-link-button href="{{ route('companies.edit', $company->id) }}">Edit</x-primary-link-button>
