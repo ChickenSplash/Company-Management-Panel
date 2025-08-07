@@ -8,33 +8,44 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 mb-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
-                <form action="{{ route('companies.update', $company->id) }}" method="POST" enctype="multipart/form-data">
+                <form id="update" class="form" action="{{ route('companies.update', $company->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     
-                    <label>Name</label>
-                    <input type="text" name="name" class="bg-black" value="{{ old('name', $company->name) }}">
-                    
-                    <label>Email</label>
-                    <input type="text" name="email" class="bg-black" value="{{ old('email', $company->email) }}">
-                    
-                    <label>Website</label>
-                    <input type="text" name="website" class="bg-black" value="{{ old('website', $company->website) }}">
-
-                    <label for="logo">Company Logo:</label>
-                    <input type="file" name="logo" id="logo">
-                    @error('logo')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                    
-                    <button type="submit">Update</button>
+                    <div class="grid">
+                        <div class="item">
+                            <x-input-label for="name" :value="__('Name:')" />
+                            <x-text-input type="text" name="name" value="{{ old('name', $company->name) }}" />
+                            <x-input-error :messages="$errors->get('name')" class="error" />
+                        </div>
+                        <div class="item">
+                            <x-input-label for="email" :value="__('Email:')" />
+                            <x-text-input type="text" name="email" value="{{ old('email', $company->email) }}" />
+                            <x-input-error :messages="$errors->get('email')" class="error" />
+                        </div>
+                        <div class="item">
+                            <x-input-label for="website" :value="__('Website:')" />
+                            <x-text-input type="text" name="website" value="{{ old('website', $company->website) }}" />
+                            <x-input-error :messages="$errors->get('website')" class="error" />
+                        </div>
+                        <div class="item">
+                            <x-input-label for="logo" :value="__('Logo:')" />
+                            <x-file-input name="logo" id="logo" />
+                            <x-input-error :messages="$errors->get('logo')" class="error" />
+                        </div>
+                    </div>
                 </form>
-                <form action="{{ route('companies.destroy', $company->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                <form id="delete" action="{{ route('companies.destroy', $company->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                     @csrf
                     @method('DELETE')
-
-                    <button type="submit">Delete</button>
                 </form>
+                <form id="back" action="{{ route('companies.show', $company->id) }}" method="GET">
+                </form>
+                <div class="buttons border-t border-gray-100 dark:border-gray-700">
+                    <x-primary-button form="update">Update</x-primary-button>
+                    <x-primary-button form="delete">Delete</x-primary-button>
+                    <x-primary-button form="back">Back</x-primary-button>
+                </div>
             </div>
         </div>
     </div>

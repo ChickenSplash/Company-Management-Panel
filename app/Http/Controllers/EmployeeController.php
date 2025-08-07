@@ -33,9 +33,9 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
+            'first_name' => 'required|string|max:64',
+            'last_name' => 'required|string|max:64',
+            'email' => 'nullable|email|max:128',
             'phone' => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
             'company_id' => 'nullable|exists:companies,id',
         ]);
