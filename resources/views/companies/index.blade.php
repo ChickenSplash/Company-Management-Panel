@@ -7,7 +7,7 @@
     
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <ul>
+            <ul class="index-list">
                 @foreach ($companies as $company)
                     <x-company-list-item :company="$company">{{ $company->name }}</x-company-list-item>
                 @endforeach

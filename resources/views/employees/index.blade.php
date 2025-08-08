@@ -7,9 +7,9 @@
     
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <ul>
+            <ul class="index-list">
                 @foreach ($employees as $employee)
-                <x-employee-list-item :employee="$employee">{{ $employee->first_name }}</x-employee-list-item>
+                    <x-employee-list-item :employee="$employee">{{ $employee->first_name }}</x-employee-list-item>
                 @endforeach
             </ul>
         </div>
