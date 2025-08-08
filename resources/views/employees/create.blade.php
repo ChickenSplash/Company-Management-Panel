@@ -13,30 +13,36 @@
                     <div class="grid">
                         <div class="item">
                             <x-input-label for="first_name" :value="__('First Name:')" />
-                            <x-text-input type="text" name="first_name" id="first_name" />
+                            <x-text-input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}" />
                             <x-input-error :messages="$errors->get('first_name')" class="error" />
                         </div>
                         <div class="item">
                             <x-input-label for="last_name" :value="__('Last Name:')" />
-                            <x-text-input type="text" name="last_name" id="last_name" />
+                            <x-text-input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}" />
                             <x-input-error :messages="$errors->get('last_name')" class="error" />  
                         </div>
                         <div class="item">
                             <x-input-label for="email" :value="__('Email:')" />
-                            <x-text-input type="text" name="email" id="email" />
+                            <x-text-input type="text" name="email" id="email" value="{{ old('email') }}" />
                             <x-input-error :messages="$errors->get('email')" class="error" />
                         </div>
                         <div class="item">
                             <x-input-label for="phone" :value="__('Phone Number:')" />
-                            <x-text-input type="text" name="phone" id="phone" />
+                            <x-text-input type="text" name="phone" id="phone" value="{{ old('phone') }}" />
                             <x-input-error :messages="$errors->get('phone')" class="error" />
                         </div>
                         <div class="item">
                             <x-input-label for="company_id" :value="__('Select Company:')" />
                             <x-text-input :select="true" name="company_id" id="company_id" required>
-                                <option value="">-- Choose Company --</option>
+                                @if (!$currentCompanyId)
+                                    <option value="">
+                                        -- Select Company --
+                                    </option>
+                                @endif
                                 @foreach ($companies as $company)
-                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    <option value="{{ $company->id }}" {{ (old('company_id', $currentCompanyId) == $company->id) ? 'selected' : '' }}>
+                                        {{ $company->name }}
+                                    </option>
                                 @endforeach
                             </x-text-input>
                         </div>

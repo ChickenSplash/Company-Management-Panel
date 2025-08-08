@@ -14,8 +14,12 @@
                         <h3>{{ $employee->first_name . ' ' . $employee->last_name }}</h3>
                         <div class="minor-details">
                             <p><strong>Employee ID:</strong> {{ $employee->id }}</p>
-                            <p><strong>Email:</strong> <a class="link" href="mailto:{{ $employee->email }}">{{ $employee->email }}</a></p>
-                            <p><strong>Phone:</strong> <a class="link" href="tel:{{ $employee->phone }}">{{ $employee->phone }}</a></p>
+                            @if ($employee->email)
+                                <p><strong>Email:</strong> <a class="link" href="mailto:{{ $employee->email }}">{{ $employee->email }}</a></p>
+                            @endif
+                            @if ($employee->phone)
+                                <p><strong>Phone:</strong> <a class="link" href="tel:{{ $employee->phone }}">{{ $employee->phone }}</a></p>
+                            @endif
                         </div>
                     </div>
                     <h4>{{ $employee->first_name . ' ' . $employee->last_name }} is an employee of {{ $employee->company->name }}</h4>

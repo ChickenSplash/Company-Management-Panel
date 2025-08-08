@@ -13,8 +13,12 @@
                         <img class="logo" src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
                         <div class="details">
                             <h3>{{ $company->name }}</h3>
-                            <p><a class="link" href="mailto:{{ $company->email }}" target="_blank">{{ $company->email }}</a></p>
-                            <p><a class="link" href="{{ $company->website }}" target="_blank">Visit Website</strong></a> <span class="link-text">({{ $company->website }})</span></p>
+                            @if ($company->email)
+                                <p><a class="link" href="mailto:{{ $company->email }}" target="_blank">{{ $company->email }}</a></p>
+                            @endif
+                            @if ($company->website)
+                                <p><a class="link" href="{{ $company->website }}" target="_blank">Visit Website</strong></a> <span class="link-text">({{ $company->website }})</span></p>
+                            @endif
                         </div>
                     </div>
                     <div class="info">
@@ -54,6 +58,7 @@
                     </div>
                     <div class="buttons">
                         <x-primary-link-button href="{{ route('companies.edit', $company->id) }}">Edit</x-primary-link-button>
+                        <x-primary-link-button href="{{ route('employees.create', $company->id) }}">Add Employee</x-primary-link-button>
                         <x-primary-link-button href="{{ route('companies.index') }}">Back</x-primary-link-button>
                     </div>
                 </div>

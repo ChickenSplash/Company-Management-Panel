@@ -14,17 +14,17 @@
                     <div class="grid">
                         <div class="item">
                             <x-input-label for="name" :value="__('Name:')" />
-                            <x-text-input type="text" name="name" />
+                            <x-text-input type="text" name="name" value="{{ old('name') }}" />
                             <x-input-error :messages="$errors->get('name')" class="error" />                            
                         </div>
                         <div class="item">
                             <x-input-label for="email" :value="__('Email:')" />
-                            <x-text-input type="text" name="email" />
+                            <x-text-input type="text" name="email" value="{{ old('email') }}" />
                             <x-input-error :messages="$errors->get('email')" class="error" />
                         </div>
                         <div class="item">
                             <x-input-label for="website" :value="__('Website:')" />
-                            <x-text-input type="text" name="website" />
+                            <x-text-input type="text" name="website" value="{{ old('website') }}" />
                             <x-input-error :messages="$errors->get('website')" class="error" />
                         </div>
                         <div class="item">

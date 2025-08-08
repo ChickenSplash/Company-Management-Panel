@@ -46,10 +46,10 @@ class EmployeeController extends Controller
         return redirect()->route('employees.show', $id);
     }
 
-    public function create()
+    public function create($currentCompanyId = null)
     {
         $companies = Company::all();
-        return view('employees.create', compact('companies'));
+        return view('employees.create', compact('companies', 'currentCompanyId'));
     }
 
     public function store(Request $request)

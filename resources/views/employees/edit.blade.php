@@ -36,9 +36,10 @@
                         <div class="item">
                             <x-input-label for="company_id" :value="__('Select Company:')" />
                             <x-text-input :select="true" name="company_id" id="company_id" required>
-                                <option value="{{ $employee->company_id }}">-- Choose Company --</option>
                                 @foreach ($companies as $company)
-                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    <option value="{{ $company->id }}" {{ (old('company_id', $employee->company_id) == $company->id) ? 'selected' : '' }}>
+                                        {{ $company->name }}
+                                    </option>
                                 @endforeach
                             </x-text-input>
                         </div>
