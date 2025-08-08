@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Employee: ' . $employee->first_name . ' ' . $employee->last_name) }}
+            <a class="link" href="{{ route('employees.index') }}">Employees</a> 
+            / <a class="link" href="{{ route('employees.show', $employee->id) }}">{{$employee->first_name . ' ' . $employee->last_name}}</a>
         </h2>
     </x-slot>
 
@@ -9,26 +10,27 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 mb-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="employee">
-                    <div class="name">
-                        <img class="logo" src="{{ $employee->profile_picture ? asset('storage/' . $employee->profile_picture) : asset('storage/logos/placeholder-profile-picture.jpg') }}" alt="Company Logo">
-                        <h3>{{ $employee->first_name . ' ' . $employee->last_name }}</h3>
-                        <div class="minor-details">
-                            <p><strong>Employee ID:</strong> {{ $employee->id }}</p>
-                            @if ($employee->email)
-                                <p><strong>Email:</strong> <a class="link" href="mailto:{{ $employee->email }}">{{ $employee->email }}</a></p>
-                            @endif
-                            @if ($employee->phone)
-                                <p><strong>Phone:</strong> <a class="link" href="tel:{{ $employee->phone }}">{{ $employee->phone }}</a></p>
-                            @endif
+                    <h3 class="name">{{ $employee->first_name . ' ' . $employee->last_name }}</h3>
+                    <div class="main-details">
+                        <div class="card">
+                            <img class="logo" src="{{ $employee->profile_picture ? asset('storage/' . $employee->profile_picture) : asset('storage/logos/placeholder-profile-picture.jpg') }}" alt="Company Logo">
+                            <div class="minor-details">
+                                <p><strong>Employee ID:</strong> {{ $employee->id }}</p>
+                                @if ($employee->email)
+                                    <p><strong>Email:</strong> <a class="link" href="mailto:{{ $employee->email }}">{{ $employee->email }}</a></p>
+                                @endif
+                                @if ($employee->phone)
+                                    <p><strong>Phone:</strong> <a class="link" href="tel:{{ $employee->phone }}">{{ $employee->phone }}</a></p>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <h4>{{ $employee->first_name . ' ' . $employee->last_name }} is an employee of {{ $employee->company->name }}</h4>
-                    <div class="name">
-                        <img class="logo" src="{{ $employee->company->logo ? asset('storage/' . $employee->company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
-                        <div class="details">
-                            <h3><a class="link" href="{{ route('companies.show', $employee->company->id) }}">{{ $employee->company->name }}</h3>
-                            <p><a class="link" href="mailto:{{ $employee->company->email }}" target="_blank">{{ $employee->company->email }}</a></p>
-                            <p><a class="link" href="{{ $employee->company->website }}" target="_blank">Visit Website</strong></a></p>
+                        <div class="card">
+                            <img class="logo" src="{{ $employee->company->logo ? asset('storage/' . $employee->company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
+                            <div class="details">
+                                <h3><a class="link" href="{{ route('companies.show', $employee->company->id) }}">{{ $employee->company->name }}</h3>
+                                <p><a class="link" href="mailto:{{ $employee->company->email }}" target="_blank">{{ $employee->company->email }}</a></p>
+                                <p><a class="link" href="{{ $employee->company->website }}" target="_blank">Visit Website</strong></a></p>
+                            </div>
                         </div>
                     </div>
                     <div class="dates">

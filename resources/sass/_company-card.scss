@@ -1,7 +1,7 @@
 @use "config" as *;
 
 .company {
-    .name {
+    .card {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -20,13 +20,18 @@
         @media (min-width: $break-point-small) {
             flex-direction:row;
         }
-
     }
 
     .dates {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        margin-block: 30px;
+        color: rgba(#ccc, 0.35);
+    }
+
+    h4 {
+        font-size: 1.125rem;
         margin-block: 30px;
     }
     
@@ -71,10 +76,6 @@
             .clickable-row:hover {
                 background-color: hsl(219, 35%, 9%);
             }
-        }
-
-        h4 {
-            font-size: 1.125rem;
         }
     }
 }

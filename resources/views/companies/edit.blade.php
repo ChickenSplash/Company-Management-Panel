@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Edit Company') }}
+            <a class="link" href="{{ route('companies.index') }}">Companies</a>
+            / <a class="link" href="{{ route('companies.show', $company->id) }}">{{$company->name}}</a> 
+            / <a class="link" href="{{ route('companies.edit', $company->id) }}">Edit</a>
         </h2>
     </x-slot>
 

@@ -36,7 +36,12 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|dimensions:min_width=100,min_height=100|max:4096',
+        ], [
+            'logo.image' => 'The uploaded file must be an image.',
+            'logo.mimes' => 'Logo must be a file of type: jpeg, png, jpg, gif.',
+            'logo.dimensions' => 'Logo must be at least 100x100 pixels.',
+            'logo.max' => 'Logo must not be larger than 4MB.',    
         ]);
 
         $company = Company::findOrFail($id);
@@ -66,7 +71,12 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
             'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100|max:4096',
+        ], [
+            'logo.image' => 'The uploaded file must be an image.',
+            'logo.mimes' => 'Logo must be a file of type: jpeg, png, jpg, gif.',
+            'logo.dimensions' => 'Logo must be at least 100x100 pixels.',
+            'logo.max' => 'Logo must not be larger than 4MB.',    
         ]);
         
         
@@ -76,9 +86,9 @@ class CompanyController extends Controller
             $validated['logo'] = $path;
         }
 
-        Company::create($validated);
+        $company = Company::create($validated);
 
-        return redirect()->route('companies.index');
+        return redirect()->route('companies.show', $company->id);
     }
 
     public function destroy($id)

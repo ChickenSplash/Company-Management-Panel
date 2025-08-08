@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Company: ' . $company->name) }}
+            <a class="link" href="{{ route('companies.index') }}">Companies</a>
+            / <a class="link" href="{{ route('companies.show', $company->id) }}">{{$company->name}}</a> 
         </h2>
     </x-slot>
 
@@ -9,7 +10,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-6 mb-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="company">
-                    <div class="name">
+                    <div class="card">
                         <img class="logo" src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
                         <div class="details">
                             <h3>{{ $company->name }}</h3>

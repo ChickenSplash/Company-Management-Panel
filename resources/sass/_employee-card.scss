@@ -1,25 +1,35 @@
 @use "config" as *;
 
 .employee {
-    .name {
+    .main-details {
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: center;
+        justify-content: center;
         gap: 30px;
-
-        h3 {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .link-text {
-            color: rgba(#ccc, 0.35);
+        flex-wrap: wrap;
+        
+        .card {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+            
+            .link-text {
+                color: rgba(#ccc, 0.35);
+            }
+            
+            @media (min-width: $break-point-small) {
+                flex-direction:row;
+            }
         }
         
         @media (min-width: $break-point-small) {
-            flex-direction:row;
+            justify-content: flex-start;
         }
+    }
+
+    .name {
+        margin-bottom: 30px;
     }
     
     .dates {
@@ -27,10 +37,17 @@
         justify-content: space-between;
         flex-wrap: wrap;
         margin-block: 30px;
+        color: rgba(#ccc, 0.35);
     }
 
+    
     h4 {
         font-size: 1.125rem;
         margin-block: 30px;
+    }
+    
+    h3 {
+        font-size: 2rem;
+        font-weight: bold;
     }
 }

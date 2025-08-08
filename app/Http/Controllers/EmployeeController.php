@@ -62,9 +62,9 @@ class EmployeeController extends Controller
             'company_id' => 'nullable|exists:companies,id',
         ]);
 
-        Employee::create($validated);
+        $employee = Employee::create($validated);
 
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.show', $employee->id);
     }    
 
     public function destroy($id)

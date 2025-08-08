@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create Employee') }}
+            <a class="link" href="{{ route('employees.index') }}">Employees</a> 
+            / <a class="link" href="{{ route('employees.create') }}">Create</a>
         </h2>
     </x-slot>
 
