@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeRequest;
 use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -30,15 +31,9 @@ class EmployeeController extends Controller
         return view('employees.edit', compact('employee', 'companies'));
     }
 
-    public function update(Request $request, $id)
+    public function update(EmployeeRequest $request, $id)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:64',
-            'last_name' => 'required|string|max:64',
-            'email' => 'nullable|email|max:128',
-            'phone' => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
-            'company_id' => 'nullable|exists:companies,id',
-        ]);
+        $validated = $request->validated();
 
         $employee = Employee::findOrFail($id);
         $employee->update($validated);
@@ -52,15 +47,9 @@ class EmployeeController extends Controller
         return view('employees.create', compact('companies', 'currentCompanyId'));
     }
 
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
-            'company_id' => 'nullable|exists:companies,id',
-        ]);
+        $validated = $request->validated();
 
         $employee = Employee::create($validated);
 

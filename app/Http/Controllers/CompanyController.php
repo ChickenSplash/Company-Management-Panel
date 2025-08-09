@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 
 use Illuminate\Http\Request;
@@ -30,19 +32,9 @@ class CompanyController extends Controller
         return view('companies.edit', compact('company'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CompanyRequest $request, $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|dimensions:min_width=100,min_height=100|max:4096',
-        ], [
-            'logo.image' => 'The uploaded file must be an image.',
-            'logo.mimes' => 'Logo must be a file of type: jpeg, png, jpg, gif.',
-            'logo.dimensions' => 'Logo must be at least 100x100 pixels.',
-            'logo.max' => 'Logo must not be larger than 4MB.',    
-        ]);
+        $validated = $request->validated(); 
 
         $company = Company::findOrFail($id);
         
@@ -65,20 +57,9 @@ class CompanyController extends Controller
         return view('companies.create');
     }
 
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'website' => 'nullable|url|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|dimensions:min_width=100,min_height=100|max:4096',
-        ], [
-            'logo.image' => 'The uploaded file must be an image.',
-            'logo.mimes' => 'Logo must be a file of type: jpeg, png, jpg, gif.',
-            'logo.dimensions' => 'Logo must be at least 100x100 pixels.',
-            'logo.max' => 'Logo must not be larger than 4MB.',    
-        ]);
-        
+        $validated = $request->validated(); 
         
         if ($request->hasFile('logo')) { // If a logo was uploaded with the form
             // Store the logo
