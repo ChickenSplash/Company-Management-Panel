@@ -2,15 +2,13 @@
 
 .employee {
     .main-details {
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(1, 2fr);
         gap: 30px;
-        flex-wrap: wrap;
-        
+
         .card {
             display: flex;
             flex-direction: column;
-            flex-wrap: wrap;
             align-items: center;
             gap: 30px;
             
@@ -23,8 +21,8 @@
             }
         }
         
-        @media (min-width: $break-point-small) {
-            justify-content: flex-start;
+        @media (min-width: $break-point-large) {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 

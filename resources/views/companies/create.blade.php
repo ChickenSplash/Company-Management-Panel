@@ -15,7 +15,7 @@
                     <div class="grid">
                         <div class="item">
                             <x-input-label for="name" :value="__('Name:')" />
-                            <x-text-input type="text" name="name" value="{{ old('name') }}" />
+                            <x-text-input type="text" name="name" value="{{ old('name') }}" required />
                             <x-input-error :messages="$errors->get('name')" class="error" />                            
                         </div>
                         <div class="item">

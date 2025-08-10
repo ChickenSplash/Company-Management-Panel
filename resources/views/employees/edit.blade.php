@@ -17,12 +17,12 @@
                     <div class="grid">
                         <div class="item">
                             <x-input-label for="first_name" :value="__('First Name:')" />
-                            <x-text-input type="text" name="first_name" id="first_name" value="{{ old('first_name', $employee->first_name) }}" />
+                            <x-text-input type="text" name="first_name" id="first_name" value="{{ old('first_name', $employee->first_name) }}" required />
                             <x-input-error :messages="$errors->get('first_name')" class="error" />
                         </div>
                         <div class="item">
                             <x-input-label for="last_name" :value="__('Last Name:')" />
-                            <x-text-input type="text" name="last_name" id="last_name" value="{{ old('last_name', $employee->last_name) }}" />
+                            <x-text-input type="text" name="last_name" id="last_name" value="{{ old('last_name', $employee->last_name) }}" required />
                             <x-input-error :messages="$errors->get('last_name')" class="error" />  
                         </div>   
                         <div class="item">

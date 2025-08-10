@@ -4,6 +4,8 @@
     display: block;
     width: 100px;
     height: 100px;
+    object-fit: cover;
+    object-position: center;
     border-radius: 50%;
     border: rgba(#ccc, 0.3) solid 1px;
     justify-content: flex-start;
