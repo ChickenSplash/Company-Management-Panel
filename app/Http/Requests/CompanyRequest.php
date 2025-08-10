@@ -22,8 +22,8 @@ class CompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
+            'name' => 'required|string|max:64',
+            'email' => 'nullable|email|max:64',
             'website' => 'nullable|url|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|dimensions:min_width=100,min_height=100|max:4096',
         ];

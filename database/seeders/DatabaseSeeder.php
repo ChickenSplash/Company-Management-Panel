@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         Company::factory(10)->create()->each(function ($company) {
             // Create 5 employees for each company
-            Employee::factory(rand(1, 10))->create([
+            Employee::factory(rand(1, 100))->create([
                 'company_id' => $company->id,
             ]);
         });

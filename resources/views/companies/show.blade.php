@@ -18,7 +18,7 @@
                                 <p><a class="link" href="mailto:{{ $company->email }}" target="_blank">{{ $company->email }}</a></p>
                             @endif
                             @if ($company->website)
-                                <p><a class="link" href="{{ $company->website }}" target="_blank">Visit Website</strong></a> <span class="link-text">({{ $company->website }})</span></p>
+                                <p><a class="link" href="{{ $company->website }}" target="_blank">Visit Website</strong></a> <span class="link-text">({{ Str::limit($company->website, 50) }})</span></p>
                             @endif
                         </div>
                     </div>
@@ -39,8 +39,8 @@
                                         @foreach ($company->employees as $employee)
                                             <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
                                                 <td>{{ $employee->id }}</td>
-                                                <td>{{ $employee->first_name . ' ' . $employee->last_name}}</td>
-                                                <td>{{ $employee->email }}</td>
+                                                <td>{{ Str::limit($employee->first_name . ' ' . $employee->last_name, 20) }}</td>
+                                                <td>{{ Str::limit($employee->email, 20) }}</td>
                                                 <td>{{ $employee->phone }}</td>
                                             </tr>
                                         @endforeach

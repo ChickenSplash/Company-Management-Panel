@@ -20,6 +20,7 @@
                     </x-company-list-item>
                 @endforeach
             </ul>
+            {{ $companies->links() }}
         </div>
     </div>
 </x-app-layout>

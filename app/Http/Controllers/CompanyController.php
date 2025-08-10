@@ -8,18 +8,19 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\Nullable;
+use Illuminate\Support\Str; // to be used directly inside the .blade files
 
 class CompanyController extends Controller
 {
     public function index() 
     { 
-        $companies = Company::all();
+        $companies = Company::paginate(10);
 
         return view('companies.index', compact('companies'));
     }
 
     public function show($id) 
-    { // after user clicking on link of corresponding company card from dashboard, run this method
+    {
         $company = Company::with('employees')->findOrFail($id);
 
         return view('companies.show', compact('company'));

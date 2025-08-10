@@ -20,6 +20,7 @@
                     </x-employee-list-item>
                 @endforeach
             </ul>
+            {{ $employees->links() }}
         </div>
     </div>
 </x-app-layout>
