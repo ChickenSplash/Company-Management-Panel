@@ -1,0 +1,17 @@
+@use "config" as *;
+
+%card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+
+    .link-text {
+        color: rgba(#ccc, 0.35);
+    }
+    
+    @media (min-width: $break-point-small) {
+        flex-direction:row;
+    }
+}

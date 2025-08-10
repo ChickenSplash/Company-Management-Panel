@@ -1,4 +1,5 @@
 @use "config" as *;
+@use "placeholders" as *;
 
 .index-list {
     display: grid;
@@ -7,5 +8,18 @@
 
     @media (min-width: $break-point-small) {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        @extend %card;
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    }
+
+    .minor-details {
+        color: rgba(#ccc, 0.35);
     }
 }

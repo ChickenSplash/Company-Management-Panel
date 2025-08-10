@@ -9,7 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <ul class="index-list">
                 @foreach ($companies as $company)
-                    <x-company-list-item :company="$company">{{ $company->name }}</x-company-list-item>
+                    <x-company-list-item :company="$company">
+                        <div class="card">
+                            <img class="logo" src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
+                            <div class="details">
+                                <h3>{{ $company->name }}</h3>
+                                <p class="minor-details">Total Employees: {{ $company->employees()->count() }}</p>
+                            </div>
+                        </div>
+                    </x-company-list-item>
                 @endforeach
             </ul>
         </div>
