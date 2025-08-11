@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 {
     public function index() {
         
-        $employees = Employee::paginate(10);
+        $employees = Employee::latest('updated_at')->paginate(10);
 
         return view('employees.index', compact('employees'));
     }

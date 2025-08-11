@@ -15,6 +15,11 @@
                             <div class="details">
                                 <h3>{{ $company->name }}</h3>
                                 <p class="minor-details">Total Employees: {{ $company->employees()->count() }}</p>
+                                @if ($company->created_at != $company->updated_at)
+                                    <p class="minor-details">Updated on {{ $company->updated_at->format('jS F Y') }}</p>
+                                @else
+                                    <p class="minor-details">Created on {{ $company->created_at->format('jS F Y') }}</p>
+                                @endif
                             </div>
                         </div>
                     </x-company-list-item>
