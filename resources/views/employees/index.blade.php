@@ -11,7 +11,7 @@
                 @foreach ($employees as $employee)
                     <x-employee-list-item :employee="$employee">
                         <div class="card">
-                            <img class="logo" src="{{ $employee->logo ? asset('storage/' . $employee->logo) : asset('storage/logos/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
+                            <img class="logo" src="{{ $employee->logo ? asset('storage/' . $employee->logo) : asset('images/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
                             <div class="details">
                                 <h3>{{ $employee->first_name . ' ' . $employee->last_name }}</h3>
                                 <p class="minor-details">Company: {{ $employee->company->name }}</p>

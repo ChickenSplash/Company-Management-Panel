@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminUserSeeder::class);
 
-        Company::factory(10)->create()->each(function ($company) {
-            // Create 5 employees for each company
-            Employee::factory(rand(1, 100))->create([
+        Company::factory(100)->create()->each(function ($company) {
+            // Create an amount of employees for each company created
+            Employee::factory(rand(1, 20))->create([
                 'company_id' => $company->id,
             ]);
         });

@@ -13,7 +13,7 @@
                     <h3 class="name">{{ $employee->first_name . ' ' . $employee->last_name }}</h3>
                     <div class="main-details">
                         <div class="card">
-                            <img class="logo" src="{{ $employee->profile_picture ? asset('storage/' . $employee->profile_picture) : asset('storage/logos/placeholder-profile-picture.jpg') }}" alt="Company Logo">
+                            <img class="logo" src="{{ $employee->profile_picture ? asset('storage/' . $employee->profile_picture) : asset('images/placeholder-profile-picture.jpg') }}" alt="Company Logo">
                             <div class="minor-details">
                                 <p><strong>Employee ID:</strong> {{ $employee->id }}</p>
                                 @if ($employee->email)
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img class="logo" src="{{ $employee->company->logo ? asset('storage/' . $employee->company->logo) : asset('storage/logos/placeholder-logo.jpg') }}" alt="Company Logo">
+                            <img class="logo" src="{{ $employee->company->logo ? asset('storage/' . $employee->company->logo) : asset('images/placeholder-logo.jpg') }}" alt="Company Logo">
                             <div class="details">
                                 <h3><a class="link" href="{{ route('companies.show', $employee->company->id) }}">{{ $employee->company->name }}</h3>
                                 <p><a class="link" href="mailto:{{ $employee->company->email }}" target="_blank">{{ $employee->company->email }}</a></p>
