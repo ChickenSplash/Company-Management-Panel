@@ -6,6 +6,7 @@ use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use phpDocumentor\Reflection\Types\Nullable;
 use Illuminate\Support\Str; // to be used directly inside the .blade files
@@ -39,13 +40,19 @@ class CompanyController extends Controller
 
         $company = Company::findOrFail($id);
         
-        if ($request->hasFile('logo')) { // if request has new logo, delete old logo if it exists
+        if ($request->hasFile('logo')) {
             if ($company->logo) {
-                Storage::disk('public')->delete($company->logo);
+                $oldLogoPath = public_path('images/' . $company->logo);
+                if (File::exists($oldLogoPath)) {
+                    File::delete($oldLogoPath);
+                }
             }
 
-            $path = $request->file('logo')->store('logos', 'public');
-            $validated['logo'] = $path;
+            $file = $request->file('logo');
+
+            $validated['logo'] = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(public_path('images'), $validated['logo']);
         }
         
         $company->update($validated);
@@ -64,8 +71,11 @@ class CompanyController extends Controller
         
         if ($request->hasFile('logo')) { // If a logo was uploaded with the form
             // Store the logo
-            $path = $request->file('logo')->store('logos', 'public');
-            $validated['logo'] = $path;
+            $file = $request->file('logo');
+
+            $validated['logo'] = time() . '_' . $file->getClientOriginalName();
+
+            $file->move(public_path('images'), $validated['logo']);
         }
 
         $company = Company::create($validated);

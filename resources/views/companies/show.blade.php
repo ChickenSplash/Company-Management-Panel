@@ -11,7 +11,7 @@
             <div class="p-6 mb-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="company">
                     <div class="card">
-                        <img class="logo" src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('images/placeholder-logo.jpg') }}" alt="Company Logo">
+                        <img class="logo" src="{{ $company->logo ? asset('images/' . $company->logo) : asset('images/placeholder-logo.jpg') }}" alt="Company Logo">
                         <div class="details">
                             <h3>{{ $company->name }}</h3>
                             @if ($company->email)
