@@ -11,7 +11,7 @@ class EmployeeController extends Controller
 {
     public function index() {
         
-        $employees = Employee::latest('updated_at')->paginate(10);
+        $employees = Employee::orderBy('last_name', 'asc')->paginate(10);
 
         return view('employees.index', compact('employees'));
     }
@@ -26,7 +26,7 @@ class EmployeeController extends Controller
     public function edit($id) 
     {
         $employee = Employee::findOrFail($id);
-        $companies = Company::all();
+        $companies = Company::orderBy('name', 'asc')->get();
 
         return view('employees.edit', compact('employee', 'companies'));
     }
@@ -43,7 +43,7 @@ class EmployeeController extends Controller
 
     public function create($currentCompanyId = null)
     {
-        $companies = Company::all();
+        $companies = Company::orderBy('name', 'asc')->get();
         return view('employees.create', compact('companies', 'currentCompanyId'));
     }
 

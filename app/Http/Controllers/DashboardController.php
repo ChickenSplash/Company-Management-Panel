@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index() {
-        
-        $companyCount = Company::all()->count();
-        $employeeCount = Employee::all()->count();
+    public function index()
+    {
+        $companyCount = Company::count();
+        $employeeCount = Employee::count();
 
-        return view('dashboard', compact('companyCount', 'employeeCount'));
+        // Get 5 most recently created companies and employees
+        $recentCompanies = Company::latest()->take(5)->get();
+        $recentEmployees = Employee::latest()->take(5)->get();
+
+        return view('dashboard', compact(
+            'companyCount',
+            'employeeCount',
+            'recentCompanies',
+            'recentEmployees'
+        ));
     }
 }

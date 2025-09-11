@@ -4,27 +4,33 @@
             <a class="link" href="{{ route('employees.index') }}">Employees</a>
         </h2>
     </x-slot>
-    
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <ul class="index-list">
-                @foreach ($employees as $employee)
-                    <x-employee-list-item :employee="$employee">
-                        <div class="card">
-                            <img class="logo" src="{{ $employee->logo ? asset('storage/' . $employee->logo) : asset('images/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
-                            <div class="details">
-                                <h3>{{ $employee->first_name . ' ' . $employee->last_name }}</h3>
-                                <p class="minor-details">Company: {{ $employee->company->name }}</p>
-                                @if ($employee->created_at != $employee->updated_at)
-                                    <p class="minor-details">Updated on {{ $employee->updated_at->format('jS F Y') }}</p>
-                                @else
-                                    <p class="minor-details">Created on {{ $employee->created_at->format('jS F Y') }}</p>
-                                @endif
-                            </div>
-                        </div>
-                    </x-employee-list-item>
-                @endforeach
-            </ul>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 text-gray-900 dark:text-gray-100">
+            <div class="table-wrapper mb-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Number</th>
+                            <th>Company</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($employees as $employee)
+                            <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
+                                <td class="name-logo">
+                                    <img class="logo" src="{{ $employee->logo ? asset('images/' . $employee->logo) : asset('images/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
+                                    <span>{{ $employee->first_name . ' ' . $employee->last_name }}</span>
+                                </td>
+                                <td>{{ $employee->email }}</td>
+                                <td>{{ $employee->phone }}</td>
+                                <td>{{ $employee->company->name }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             {{ $employees->links() }}
         </div>
     </div>

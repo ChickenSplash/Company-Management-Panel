@@ -25,8 +25,8 @@
                     <div class="info">
                         @if ($company->employees()->count())
                             <h4>Total Employees: {{ $company->employees()->count() }}</h4>
-                            <div class="employee-table-wrapper">
-                                <table class="employee-table">
+                            <div class="table-wrapper">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
