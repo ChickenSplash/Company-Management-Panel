@@ -10,8 +10,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <x-sortable-employees-column label="First Name" column="first_name" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
+                            <x-sortable-employees-column label="Last Name" column="last_name" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
+                            <x-sortable-employees-column label="Email" column="email" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
                             <th>Number</th>
                             <th>Company</th>
                         </tr>
@@ -21,8 +22,9 @@
                             <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
                                 <td class="name-logo">
                                     <img class="logo" src="{{ $employee->logo ? asset('images/' . $employee->logo) : asset('images/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
-                                    <span>{{ $employee->first_name . ' ' . $employee->last_name }}</span>
+                                    {{ $employee->first_name }}
                                 </td>
+                                <td>{{ $employee->last_name }}</td>
                                 <td>{{ $employee->email }}</td>
                                 <td>{{ $employee->phone }}</td>
                                 <td>{{ $employee->company->name }}</td>
@@ -31,7 +33,10 @@
                     </tbody>
                 </table>
             </div>
-            {{ $employees->links() }}
+            {{ $employees->appends([ // tell the paginator to pass in the url parameters so it doesnt overwrite them
+                'sortBy' => $sortBy, 
+                'sortDirection' => $sortDirection
+            ])->links() }}
         </div>
     </div>
 </x-app-layout>

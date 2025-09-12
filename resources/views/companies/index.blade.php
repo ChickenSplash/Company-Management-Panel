@@ -11,11 +11,11 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <x-sortable-companies-column label="Name" column="name" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
                             <th>Employees</th>
-                            <th>Email</th>
-                            <th>Website</th>
-                            <th>Last Updated</th>
+                            <x-sortable-companies-column label="Email" column="email" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
+                            <x-sortable-companies-column label="Website" column="website" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
+                            <x-sortable-companies-column label="Last Updated" column="updated_at" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,14 +27,17 @@
                                 </td>
                                 <td class="numbered-cell">{{ $company->employees->count() }}</td>
                                 <td>{{ $company->email }}</td>
-                                <td>{{ parse_url($company->website, PHP_URL_HOST) }}</td>
+                                <td>{{ Str::replaceFirst('www.', '', parse_url($company->website, PHP_URL_HOST)) }}</td>
                                 <td>{{ $company->updated_at->format('jS F Y') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            {{ $companies->links() }}
+            {{ $companies->appends([ // tell the paginator to pass in the url parameters so it doesnt overwrite them
+                'sortBy' => $sortBy, 
+                'sortDirection' => $sortDirection
+            ])->links() }}
         </div>
     </div>
 </x-app-layout>

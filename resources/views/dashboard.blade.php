@@ -48,7 +48,7 @@
                                         <img class="logo" src="{{ $employee->logo ? asset('images/' . $employee->logo) : asset('images/placeholder-logo.jpg') }}" alt="Company Logo">
                                         <span>{{ $employee->first_name . ' ' . $employee->last_name }}</span>
                                     </td>
-                                    <td>{{ $employee->updated_at->format('jS F Y') }}</td>
+                                    <td>{{ $employee->created_at->format('jS F Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

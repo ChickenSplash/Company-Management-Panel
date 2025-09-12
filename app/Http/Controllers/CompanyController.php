@@ -13,18 +13,29 @@ use Illuminate\Support\Str; // to be used directly inside the .blade files
 
 class CompanyController extends Controller
 {
-    public function index() 
+    public function index(Request $request) 
     { 
-        $companies = Company::orderBy('name', 'asc')->paginate(10);
+        $sortBy = $request->get('sortBy', 'name'); // just so the default values are set on first load before user requests to sort anything
+        $sortDirection = $request->get('sortDirection', 'asc');
 
-        return view('companies.index', compact('companies'));
+        $companies = Company::orderBy($sortBy, $sortDirection)->paginate(10);
+
+        return view('companies.index', compact('companies', 'sortBy', 'sortDirection'));
     }
 
-    public function show($id) 
+    public function show(Request $request, $id) 
     {
-        $company = Company::with('employees')->findOrFail($id);
+        $sortBy = $request->get('sortBy', 'last_name');
+        $sortDirection = $request->get('sortDirection', 'asc');
 
-        return view('companies.show', compact('company'));
+        $company = Company::findOrFail($id);
+
+        // Get sorted employees for this company
+        $sortedEmployees = $company->employees()
+            ->orderBy($sortBy, $sortDirection)
+            ->get();
+
+        return view('companies.show', compact('company', 'sortBy', 'sortDirection', 'sortedEmployees'));
     }
 
     public function edit($id) 

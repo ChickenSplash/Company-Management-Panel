@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         
-        $employees = Employee::orderBy('last_name', 'asc')->paginate(10);
+        $sortBy = $request->get('sortBy', 'last_name'); // just so the default values are set on first load before user requests to sort anything
+        $sortDirection = $request->get('sortDirection', 'asc');
 
-        return view('employees.index', compact('employees'));
+        $employees = Employee::orderBy($sortBy, $sortDirection)->paginate(10);
+
+        return view('employees.index', compact('employees', 'sortBy', 'sortDirection'));
     }
 
     public function show($id) { 

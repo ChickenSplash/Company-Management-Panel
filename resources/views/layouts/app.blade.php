@@ -21,9 +21,9 @@
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-wrap gap-3 justify-between">
                         {{ $header }}
-                        <div class="flex gap-5">
+                        <div class="flex flex-wrap gap-3">
                             <x-primary-link-button href="{{ route('companies.create') }}">Create Company</x-primary-link-button>
                             <x-primary-link-button href="{{ route('employees.create') }}">Create Employee</x-primary-link-button>
                         </div>
