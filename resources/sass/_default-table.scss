@@ -1,24 +1,23 @@
 @use "config" as *;
 @use "placeholders" as *;
+@use "sass:color";
 
 .table-wrapper {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     
     .table {
         width: 100%;
         min-width: 600px;
         border-collapse: collapse;
-        font-family: Arial, sans-serif;
         white-space: nowrap;
 
         .name-logo {
             display: flex;
             align-items: center;
-            margin-right: 20px;
             
             .logo {
                 height: 40px;
@@ -29,29 +28,47 @@
         
     
         thead {
-            background-color: hsl(221, 39.3%, 12%);
+            background-color: $color-trim;
+            color: $color-primary;
         }
     
         th,
         td {
             padding: 12px 16px;
-            text-align: left;
+            text-align: center;
+        }
+        
+        tr {
+            
         }
     
         tbody tr:nth-child(even) {
-            background-color: hsl(221, 39.3%, 12%);
+            background-color: $color-secondary;
+
+            td:not(:last-child) {
+                border-right: 1px solid $color-primary;
+            }
+
+            &:hover {
+                background-color: color.adjust($color-secondary, $lightness: 5%);
+            }
         }
 
         tbody tr:nth-child(odd) {
-            background-color: hsl(221, 39.3%, 15%);
+            background-color: $color-primary;
+            
+            td:not(:last-child) {
+                border-right: 1px solid $color-secondary;
+            }
+
+            &:hover {
+                background-color: color.adjust($color-primary, $lightness: 5%);
+            }
         }
     
         .clickable-row {
             cursor: pointer;
             transition: background-color 0.15s;
-        }
-        .clickable-row:hover {
-            background-color: hsl(219, 35%, 9%);
         }
     }
 }

@@ -40,7 +40,7 @@
                                             <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
                                                 <td>{{ $employee->id }}</td>
                                                 <td>{{ Str::limit($employee->first_name . ' ' . $employee->last_name, 20) }}</td>
-                                                <td>{{ Str::limit($employee->email, 20) }}</td>
+                                                <td>{{ $employee->email }}</td>
                                                 <td>{{ $employee->phone }}</td>
                                             </tr>
                                         @endforeach

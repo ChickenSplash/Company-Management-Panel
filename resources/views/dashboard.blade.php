@@ -10,13 +10,14 @@
             <div class="dashboard p-6 mb-6 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <h3>Welcome</h3>
                 <p>There are <strong>{{ $employeeCount }}</strong> employees spread across <strong>{{ $companyCount }}</strong> Companies.</p>
-                <h4 class="my-7 text-2xl font-bold">Recently Added Companies</h4>
+            </div>
+            <div class="text-gray-100 recent-items">
                 <div class="table-wrapper">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Last Updated</th>
+                                <th>Recently Created Companies</th>
+                                <th>Created</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,18 +33,17 @@
                         </tbody>
                     </table>
                 </div>
-                <h4 class="my-7 text-2xl font-bold">Recently Added Employees</h4>
                 <div class="table-wrapper">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Last Updated</th>
+                                <th>Recently Created Employees</th>
+                                <th>Created</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($recentEmployees as $employee)
-                                <tr class="clickable-row" data-href="{{ route('companies.show', $employee->id) }}">
+                                <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
                                     <td class="name-logo">
                                         <img class="logo" src="{{ $employee->logo ? asset('images/' . $employee->logo) : asset('images/placeholder-logo.jpg') }}" alt="Company Logo">
                                         <span>{{ $employee->first_name . ' ' . $employee->last_name }}</span>
@@ -53,10 +53,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="buttons">
-                    <x-primary-link-button href="{{ route('employees.create') }}">Create Employee</x-primary-link-button>
-                    <x-primary-link-button href="{{ route('companies.create') }}">Create Company</x-primary-link-button>
                 </div>
             </div>
         </div>

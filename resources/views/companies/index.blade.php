@@ -12,6 +12,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Employees</th>
                             <th>Email</th>
                             <th>Website</th>
                             <th>Last Updated</th>
@@ -24,8 +25,9 @@
                                     <img class="logo" src="{{ $company->logo ? asset('images/' . $company->logo) : asset('images/placeholder-logo.jpg') }}" alt="Company Logo">
                                     <span>{{ $company->name }}</span>
                                 </td>
+                                <td class="numbered-cell">{{ $company->employees->count() }}</td>
                                 <td>{{ $company->email }}</td>
-                                <td>{{ Str::limit($company->website, 20) }} </td>
+                                <td>{{ parse_url($company->website, PHP_URL_HOST) }}</td>
                                 <td>{{ $company->updated_at->format('jS F Y') }}</td>
                             </tr>
                         @endforeach
@@ -36,4 +38,3 @@
         </div>
     </div>
 </x-app-layout>
-

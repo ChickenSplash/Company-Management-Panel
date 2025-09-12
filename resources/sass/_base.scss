@@ -17,13 +17,13 @@
 }
 
 * {
-  scrollbar-color: hsl(221, 39.3%, 12%) hsl(221, 39.3%, 15%); /* Firefox */
+  scrollbar-color: $color-secondary $color-primary; /* Firefox */
 }
 
 *::-webkit-scrollbar-track {
-  background: hsl(221, 39.3%, 15%);
+  background: $color-secondary;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: hsl(221, 39.3%, 12%);
+  background-color: $color-primary;
 }
