@@ -18,7 +18,15 @@ class CompanyController extends Controller
         $sortBy = $request->get('sortBy', 'name'); // just so the default values are set on first load before user requests to sort anything
         $sortDirection = $request->get('sortDirection', 'asc');
 
-        $companies = Company::orderBy($sortBy, $sortDirection)->paginate(10);
+        if ($sortBy === 'employees_count') {
+            $companies = Company::withCount('employees')
+                ->orderBy('employees_count', $sortDirection)
+                ->paginate(10);
+        } else {
+            $companies = Company::withCount('employees') // still add count for display
+                ->orderBy($sortBy, $sortDirection)
+                ->paginate(10);
+        }
 
         return view('companies.index', compact('companies', 'sortBy', 'sortDirection'));
     }
@@ -33,7 +41,7 @@ class CompanyController extends Controller
         // Get sorted employees for this company
         $sortedEmployees = $company->employees()
             ->orderBy($sortBy, $sortDirection)
-            ->get();
+            ->paginate(10);
 
         return view('companies.show', compact('company', 'sortBy', 'sortDirection', 'sortedEmployees'));
     }
@@ -98,8 +106,11 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
 
-        if ($company->logo) { // if the company has set logo, delete from storage
-            Storage::disk('public')->delete($company->logo);
+        if ($company->logo) { // if the company has set logo, delete from public/images
+            $logoPath = public_path('images/' . $company->logo);
+            if (File::exists($logoPath)) {
+                File::delete($logoPath);
+            }
         }
 
         $company->delete();

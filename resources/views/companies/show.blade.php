@@ -41,7 +41,7 @@
                 </div>
             </div>
             @if ($company->employees()->count())
-                <div class="table-wrapper text-gray-100">
+                <div class="table-wrapper text-gray-100 mb-6">
                     <table class="table">
                         <thead>
                             <tr>
@@ -66,6 +66,10 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $sortedEmployees->appends([ // tell the paginator to pass in the url parameters so it doesnt overwrite them
+                    'sortBy' => $sortBy, 
+                    'sortDirection' => $sortDirection
+                ])->links() }}
             @endif
         </div>
     </div>
