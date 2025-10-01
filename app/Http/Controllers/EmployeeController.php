@@ -14,7 +14,11 @@ class EmployeeController extends Controller
         $sortBy = $request->get('sortBy', 'last_name'); // just so the default values are set on first load before user requests to sort anything
         $sortDirection = $request->get('sortDirection', 'asc');
 
-        $employees = Employee::orderBy($sortBy, $sortDirection)->paginate(10);
+        $employees = Employee::with('company')
+            ->select('employees.*')
+            ->join('companies', 'employees.company_id', '=', 'companies.id')
+            ->orderBy($sortBy, $sortDirection)
+            ->paginate(10);
 
         return view('employees.index', compact('employees', 'sortBy', 'sortDirection'));
     }

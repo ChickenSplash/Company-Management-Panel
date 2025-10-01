@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-warning-popup-employee :employee="$employee" />
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <a class="link" href="{{ route('employees.index') }}">Employees</a> 
@@ -47,15 +49,11 @@
                         </div>
                     </div>
                 </form>
-                <form id="delete" action="{{ route('employees.destroy', $employee->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-                    @csrf
-                    @method('DELETE')
-                </form>
                 <form id="back" action="{{ route('employees.show', $employee->id) }}" method="GET">
                 </form>
                 <div class="buttons border-t border-gray-100 dark:border-gray-700">
                     <x-primary-button form="update">Update</x-primary-button>
-                    <x-primary-button form="delete">Delete</x-primary-button>
+                    <x-primary-button onclick="togglePopupDisplay()">Delete</x-primary-button>
                     <x-primary-button form="back">Back</x-primary-button>
                 </div>
             </div>

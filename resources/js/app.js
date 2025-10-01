@@ -14,3 +14,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+function togglePopupDisplay() {
+    const popup = document.querySelector(".warning-popup");
+
+    if (popup.style.display === "none" || popup.style.display === "") {
+        popup.style.display = "flex";
+    } else {
+        popup.style.display = "none";
+    }
+}
+window.togglePopupDisplay = togglePopupDisplay;
+
+function checkCompanyName(expectedName) {
+    const input = document.getElementById('confirm-name');
+    const deleteBtn = document.getElementById('delete-btn');
+
+    if (input && input.value.trim() === expectedName) {
+        deleteBtn.removeAttribute('disabled');
+        deleteBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    } else {
+        deleteBtn.setAttribute('disabled', 'true');
+        deleteBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    }
+}
+window.checkCompanyName = checkCompanyName;
+

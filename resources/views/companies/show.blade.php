@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-warning-popup-company :company="$company" />
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             <a class="link" href="{{ route('companies.index') }}">Companies</a>
@@ -36,7 +38,8 @@
                     <div class="buttons">
                         <x-primary-link-button href="{{ route('companies.edit', $company->id) }}">Edit</x-primary-link-button>
                         <x-primary-link-button href="{{ route('employees.create', $company->id) }}">Add Employee</x-primary-link-button>
-                        <x-primary-link-button href="{{ route('companies.index') }}">Back</x-primary-link-button>
+                        <x-primary-button onclick="togglePopupDisplay()">Delete</x-primary-button>
+                        <x-primary-link-button href="{{ url()->previous() }}">Back</x-primary-link-button>
                     </div>
                 </div>
             </div>

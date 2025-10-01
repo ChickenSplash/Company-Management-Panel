@@ -28,11 +28,15 @@
         
     
         thead {
-            background-color: $color-trim;
-            color: $color-primary;
-
-            a {
-                padding: 12px 16px;
+            tr {
+                th {
+                    background-color: $color-trim;
+                    color: $color-primary;
+        
+                    a {
+                        padding: 12px 16px;
+                    }
+                }
             }
         }
     

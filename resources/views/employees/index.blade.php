@@ -14,7 +14,7 @@
                             <x-sortable-employees-column label="Last Name" column="last_name" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
                             <x-sortable-employees-column label="Email" column="email" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
                             <th>Number</th>
-                            <th>Company</th>
+                            <x-sortable-employees-column label="Company Name" column="name" :sortBy="$sortBy" :sortDirection="$sortDirection"/>
                         </tr>
                     </thead>
                     <tbody>
