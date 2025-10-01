@@ -1,3 +1,7 @@
+# Company Management Panel
+
+Create, Read, Update, and Delete operations for two key resources; Companies and Employees.
+
 ## Recommendation to run locally:
 
 - Download and unzip this repo, `cd` to project root in your terminal and run `composer install`. This will pull in everything from [composer.json](composer.json). You will need [Composer](https://getcomposer.org/download/) installed.

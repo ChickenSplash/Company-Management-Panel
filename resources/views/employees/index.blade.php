@@ -22,7 +22,7 @@
                             <tr class="clickable-row" data-href="{{ route('employees.show', $employee->id) }}">
                                 <td class="name-logo">
                                     <img class="logo" src="{{ $employee->logo ? asset('images/' . $employee->logo) : asset('images/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
-                                    {{ $employee->first_name }}
+                                    <span>{{ $employee->first_name }}</span>
                                 </td>
                                 <td>{{ $employee->last_name }}</td>
                                 <td>{{ $employee->email }}</td>

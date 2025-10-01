@@ -41,3 +41,13 @@ function checkCompanyName(expectedName) {
 }
 window.checkCompanyName = checkCompanyName;
 
+document.addEventListener('DOMContentLoaded', function () {
+    const createForm = document.getElementById('create');
+    const createBtn = document.getElementById('create-btn');
+    if (createForm && createBtn) {
+        createForm.addEventListener('submit', function () {
+            createBtn.disabled = true;
+        });
+    }
+});
+

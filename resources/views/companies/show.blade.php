@@ -60,7 +60,7 @@
                                     <td>{{ $employee->id }}</td>
                                     <td class="name-logo">
                                         <img class="logo" src="{{ $employee->logo ? asset('images/' . $employee->logo) : asset('images/placeholder-profile-picture.jpg') }}" alt="Employee Logo">
-                                        {{ $employee->first_name . ' ' . $employee->last_name }}
+                                        <span>{{ $employee->first_name . ' ' . $employee->last_name }}</span>
                                     </td>
                                     <td>{{ $employee->email }}</td>
                                     <td>{{ $employee->phone }}</td>

@@ -38,7 +38,7 @@
                 <form id="back" action="{{ route('companies.index') }}" method="GET">
                 </form>
                 <div class="buttons border-t border-gray-100 dark:border-gray-700">
-                    <x-primary-button form="create">Create</x-primary-button>
+                    <x-primary-button form="create" id="create-btn">Create</x-primary-button>
                     <x-primary-button form="back">Back</x-primary-button>
                 </div>
             </div>
